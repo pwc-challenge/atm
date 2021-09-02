@@ -3,3 +3,5 @@
 /atm-example/.classpath
 /atm-example/.project
 /atm-example/.settings/
+/atm-example/test-classes/nicebank/withdrawal.feature
+
