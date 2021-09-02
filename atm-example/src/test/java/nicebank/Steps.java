@@ -8,14 +8,15 @@ import cucumber.api.java.en.Then;
 public class Steps {
 
     class Account{
-        public Account(int openingBalance){
+        public void deposit(int amount){
 
         }
     }
 
     @Given("^I have deposited \\$(\\d+) in my account") 
     public void i_have_deposited_$_in_my_account(int amount) throws Throwable{
-        new Account(amount);
+        Account myAccount = new Account();
+        myAccount.deposit(amount);
     }
 
     @When("^I request \\$(\\d+)$")
