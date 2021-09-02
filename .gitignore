@@ -1,0 +1,5 @@
+/atm-example/target/*
+/.vscode/
+/atm-example/.classpath
+/atm-example/.project
+/atm-example/.settings/
