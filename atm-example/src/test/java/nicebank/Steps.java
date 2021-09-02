@@ -95,7 +95,9 @@ public class Steps {
 
     @When("^I request \\$(\\d+)$")
     public void i_request_$(int dollars) throws Throwable {
+
         helper.getTeller().withdrawFrom(helper.getMyAccount(), dollars);
+
     }
 
      @Then("^\\$(\\d+) should be dispensed$")
@@ -103,6 +105,7 @@ public class Steps {
 
         assertEquals("Incorrect amount dispensed -",
                                 dollars, helper.getCashSlot().contents());
+                                
      }
     
 }
