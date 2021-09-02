@@ -9,7 +9,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        Money money = new Money("$200.00");
-        System.out.println(money.toString());
+        Money amount = new Money();
+        System.out.println(amount.toString());
     }
 }
