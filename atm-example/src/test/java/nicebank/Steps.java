@@ -9,23 +9,24 @@ import org.junit.*;
 
 public class Steps {
 
-    class Account{
-        public void deposit(int amount){
+    private Money balance = new Money();
 
+    class Account{
+        public Money deposit(Money amount){
+            return balance = balance.add(amount);
         }
 
-        public int getBalance(){
-            return 0;
+        public Money getBalance(){
+            return balance;
         }
     }
 
-    @Given("^I have deposited \\$(\\d+) in my account") 
-    public void i_have_deposited_$_in_my_account(int amount) throws Throwable{
+    @Given("^I have deposited \\$(\\d+\\.\\d+) in my account$") 
+    public void i_have_deposited_$_in_my_account(Money amount) throws Throwable{
         Account myAccount = new Account();
         myAccount.deposit(amount);
 
-        Assert.assertEquals("Incorrect account balance -", 
-            amount, myAccount.getBalance());
+        Assert.assertEquals("Incorrect account balance -", amount, myAccount.getBalance());
     }
 
     @When("^I request \\$(\\d+)$")
