@@ -8,8 +8,6 @@ import cucumber.api.java.en.Then;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.*;
-
 public class Steps {
 
     private Money balance = new Money();
@@ -89,7 +87,7 @@ public class Steps {
         
         helper.getMyAccount().deposit(amount);
 
-        Assert.assertEquals("Incorrect account balance -", 
+        assertEquals("Incorrect account balance -", 
                                 amount, helper.getMyAccount().getBalance());
     }
 
@@ -105,7 +103,7 @@ public class Steps {
 
         assertEquals("Incorrect amount dispensed -",
                                 dollars, helper.getCashSlot().contents());
-                                
+
      }
     
 }
