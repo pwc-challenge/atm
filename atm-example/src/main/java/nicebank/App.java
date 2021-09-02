@@ -1,5 +1,6 @@
 package nicebank;
 
+
 /**
  * Hello world!
  *
@@ -8,6 +9,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        Money money = new Money("$200.00");
+        System.out.println(money.toString());
     }
 }
