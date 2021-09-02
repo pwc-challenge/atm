@@ -1,11 +1,12 @@
 package nicebank;
 
-import cucumber.api.PendingException;
 import cucumber.api.Transform;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import transforms.MoneyConverter;
 import cucumber.api.java.en.Then;
+
+import static org.junit.Assert.assertEquals;
 
 import org.junit.*;
 
@@ -24,14 +25,36 @@ public class Steps {
     }
 
     class Teller{
-        public void withdrawFrom(Account account, int dollars){
 
+        private CashSlot cashSlot;
+
+        public Teller(CashSlot cashSlot){
+            this.cashSlot = cashSlot;
+        }
+
+        public void withdrawFrom(Account account, int dollars){
+            cashSlot.dispense(dollars);
         }
     }
 
-    class KnowsMyAccount{
+    class CashSlot{
+        
+        private int contents; 
+
+        public int contents(){
+            return contents;
+        }
+
+        public void dispense(int dollars) {
+            contents = dollars;
+        }
+    }
+
+    class KnowsTheDomain{
 
         private Account myAccount;
+        private CashSlot cashSlot;
+        private Teller teller;
 
         public Account getMyAccount(){
             if(myAccount == null){
@@ -39,12 +62,26 @@ public class Steps {
             }
             return myAccount;   
         }
+
+        public CashSlot getCashSlot(){
+            if(cashSlot == null){
+                cashSlot = new CashSlot();
+            }
+            return cashSlot;
+        }
+
+        public Teller getTeller(){
+            if(teller == null){
+                teller = new Teller(getCashSlot());
+            }
+            return teller;
+        }
     }
 
-    KnowsMyAccount helper;
+    KnowsTheDomain helper;
 
     public Steps(){
-        helper = new KnowsMyAccount();
+        helper = new KnowsTheDomain();
     }
 
     @Given("^I have deposited \\$(\\d+\\.\\d+) in my account$") 
@@ -57,15 +94,15 @@ public class Steps {
     }
 
     @When("^I request \\$(\\d+)$")
-    public void i_request_$(int amount) throws Throwable {
-        Teller teller = new Teller();
-        teller.withdrawFrom(helper.getMyAccount(), amount);
+    public void i_request_$(int dollars) throws Throwable {
+        helper.getTeller().withdrawFrom(helper.getMyAccount(), dollars);
     }
 
      @Then("^\\$(\\d+) should be dispensed$")
-     public void $_should_be_dispensed(int amount) throws Throwable{
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+     public void $_should_be_dispensed(int dollars) throws Throwable{
+
+        assertEquals("Incorrect amount dispensed -",
+                                dollars, helper.getCashSlot().contents());
      }
     
 }
