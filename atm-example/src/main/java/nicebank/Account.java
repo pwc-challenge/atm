@@ -6,4 +6,8 @@ public class Account {
     public void deposit(Money amount){
         balance = balance.add(amount);
     }
+
+    public Money getBalance(){
+        return balance;
+    }
 }
