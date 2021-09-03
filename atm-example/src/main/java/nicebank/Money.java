@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class Money {
+    
     private final int dollars;
     private final int cents;
 
