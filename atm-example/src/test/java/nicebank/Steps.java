@@ -13,8 +13,8 @@ public class Steps {
     private Money balance = new Money();
 
     class Account{
-        public Money deposit(Money amount){
-            return balance = balance.add(amount);
+        public void deposit(Money amount){
+            balance = balance.add(amount);
         }
 
         public Money getBalance(){
@@ -96,7 +96,7 @@ public class Steps {
 
         helper.getTeller().withdrawFrom(helper.getMyAccount(), dollars);
 
-    }
+     }
 
      @Then("^\\$(\\d+) should be dispensed$")
      public void $_should_be_dispensed(int dollars) throws Throwable{
